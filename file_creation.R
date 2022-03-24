@@ -1,4 +1,5 @@
 library(tidyverse)
+library(qualtRics)
 
 #function that passes files from 
 read <- function(data){
@@ -39,7 +40,7 @@ write.csv(flanker, file = "data/flanker.csv")
 #-----------------------------------------------------------
 
 #==========================
-#cueing task
+#Cueing task
 #==========================
 
 #importing data
@@ -47,7 +48,7 @@ write.csv(flanker, file = "data/flanker.csv")
 cueing <- list.files(path = "data/cueing", pattern = "*.txt", full.names = TRUE)
 
 cueing <- read(cueing)
-colnames(cueing)<-c("cueSide","targetSide","cueValidity","cued","ValidityNum", "condition", "subn") #rename variables
+colnames(cueing)<-c("cueSide","targetSide","cueValidity","cued","ValidityNum", "RT", "status", "condition", "subn") #rename variables
 
 write.csv(cueing, file = "data/cueing.csv")
 
@@ -76,3 +77,19 @@ gonogo <- read(gonogo)
 colnames(gonogo)<-c("type","RT","errorStatus","condition", "subn") #rename variables
 
 write.csv(gonogo, file = "data/go-nogo.csv")
+
+#==========================
+#Qualtrics resonses
+#==========================
+
+#survey_response <- read_survey("data/qualtrics/WorkingEnvironments0324.csv")
+
+#STAI <- survey_response %>% 
+  #select(Q1, Q6:Q25)
+
+#neuroticism <- survey_response %>% 
+  #select(Q1, Q27:)
+
+
+
+
