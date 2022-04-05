@@ -29,7 +29,7 @@ flanker <- list.files(path = "data/flanker",
                       pattern = "*.txt", full.names = TRUE)
 
 flanker <- read(flanker)
-colnames(flanker)<-c("trial","text","congruency","status","RT", "condition", "subn") #rename variables
+colnames(flanker)<-c("trial","text","Congruency","status","RT", "condition", "subn") #rename variables
 
 write.csv(flanker, file = "data/flanker.csv")
 
