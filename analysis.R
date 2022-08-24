@@ -2,6 +2,8 @@ library(tidyverse)
 library(stats)
 library(rstatix)
 library(CGPfunctions)
+library(BayesFactor)
+library(here)
 
 #this runs the R-file creation program first to get the files to work with
 source("file_creation.R")
@@ -45,6 +47,51 @@ flanker_summary %>%
 #ANOVA with DV response time and between group IV condition and within group IV congruency
 aov_RT_condition_congruency <- aov(meanRT ~ condition*Congruency + Error(subn/Congruency), data = flanker_summary)
 summary(aov_RT_condition_congruency)
+
+
+#bayesian analysis of RT
+# bayes_flanker_RT <- anovaBF(meanRT ~ condition*Congruency + subn, data = flanker_summary, whichRandom = "subn")
+# bayes_flanker_RT
+# 
+# plot(bayes_flanker_RT)
+# 
+# mcmcOut = posterior(bayes_flanker_RT, index = 3, iterations=10000)
+# mcmcOut
+# 
+# plot(mcmcOut[,"mu"])
+
+# library(bayesplot)
+# 
+# # 
+# mcmc_intervals(mcmcOut, pars = c("condition-Cluttered", "condition-Organized"),
+#                prob_outer = .95)
+# 
+# mcmc_intervals(mcmcOut, pars = c("Congruency-Congruent", "Congruency-Incongruent"),
+#                prob_outer = .95)
+# 
+# mcmc_areas(
+#   mcmcOut, 
+#   pars = c("condition-Cluttered", 
+#            "condition-Organized"),
+#   prob = 0.8, # 80% intervals
+#   prob_outer = 0.95, # 95%
+#   point_est = "mean"
+# )
+# 
+# mcmc_areas(
+#   mcmcOut, 
+#   pars = c("Congruency-Congruent", "Congruency-Incongruent"),
+#   prob = 0.8, # 80% intervals
+#   prob_outer = 0.95, # 95%
+#   point_est = "mean"
+# )
+
+#ttestBF(x=flanker_summary2$meanRT[flanker_summary$condition == "Cluttered"],
+ #       y=flanker_summary2$meanRT[flanker_summary$condition == "Organized"])
+
+#ttestBF(x=flanker_summary$meanRT[flanker_summary$Congruency == "Congruent"],
+ #       y=flanker_summary$meanRT[flanker_summary$Congruency == "Incongruent"])
+
 
 #ANOVA with DV accuracy and between group IV condition and within group IV congruency
 aov_accuracy_condition_congruency <- aov(meanAccuracy ~ condition*Congruency + Error(subn/Congruency), data = flanker_summary)
@@ -138,6 +185,30 @@ cueing_summary$Congruency <-  cueing_summary$ValidityNum
 #ANOVA with DV response time and between group IV condition and within group IV ValidityNum
 cueing_aov_RT_condition_congruency <- aov(meanRT ~ condition*ValidityNum + Error(subn/ValidityNum), data = cueing_summary)
 summary(cueing_aov_RT_condition_congruency)
+
+
+
+
+
+
+
+#cueing task bayesian analysis
+# bayes_cueing_RT <- anovaBF(meanRT ~ condition*ValidityNum + subn, data = cueing_summary, whichRandom = "subn")
+# bayes_cueing_RT
+# 
+# plot(bayes_cueing_RT)
+# 
+# 
+# plot(mcmcOut2[,"mu"])
+
+
+
+
+
+
+
+
+
 
 #ANOVA with DV accuracy and between group IV condition and within group IV ValidityNum
 cueing_aov_accuracy_condition_congruency <- aov(meanAccuracy ~ condition*ValidityNum + Error(subn/ValidityNum), data = cueing_summary)
@@ -353,3 +424,4 @@ gonogo_plot_accuracy = ggplot(gonogo_summary, aes(x = condition, y = meanAccurac
 
 gonogo_plot_RT
 gonogo_plot_accuracy
+
