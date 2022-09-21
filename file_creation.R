@@ -82,13 +82,13 @@ write.csv(gonogo, file = "data/go-nogo.csv")
 #Qualtrics resonses
 #==========================
 
-#survey_response <- read_survey("data/qualtrics/WorkingEnvironments0324.csv")
+survey_response <- read_survey("data/qualtrics/AWE_20222131.csv")
 
-#STAI <- survey_response %>% 
-  #select(Q1, Q6:Q25)
+STAI <- survey_response %>% 
+  select(Q1, Q6:Q25)
 
-#neuroticism <- survey_response %>% 
-  #select(Q1, Q27:)
+neuroticism <- survey_response %>%
+  select(Q1, Q28:Q37)
 
 
 

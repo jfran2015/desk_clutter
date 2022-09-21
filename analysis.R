@@ -15,7 +15,8 @@ source("file_creation.R")
 
 #removing unusable data and turing it into NA
 flanker_analysis <- flanker %>%
-  mutate(subn = as.factor(subn),
+  mutate(subn = as.numeric(subn), #this line is only to remove the leading 0 which caused an issue with a left join
+         subn = as.factor(subn),
          RT = ifelse(RT > 1500, NA, RT),
          RT = ifelse(RT <= 100, NA, RT),
          RT = ifelse(RT > mean(RT, na.rm=TRUE)+2.5*sd(RT, na.rm = TRUE), NA, RT),
@@ -161,7 +162,8 @@ flanker_plot_accuracy
 #===============================
 
 cueing_analysis <- cueing %>%
-  mutate(subn = as.factor(subn),
+  mutate(subn = as.numeric(subn), #this line is only to remove the leading 0 which caused an issue with a left join
+         subn = as.factor(subn),
          RT = ifelse(RT < 100, NA, RT),
          RT = ifelse(RT >= 1000, NA, RT),
          RT = ifelse(RT > mean(RT, na.rm=TRUE)+2.5*sd(RT, na.rm = TRUE), NA, RT),
